@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Productora | Agro App</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+
+        <link rel="stylesheet" href="{% static 'comercio/css/banner.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/banneringreso.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/bannerproductos.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/blog.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/fontello.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/footerproductos.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/groups.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/info.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/main.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/menu.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/productodetalle.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/productos.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/productoslista.css' %}">
+
+    </head>
+
+    <body>
+        <header>
+            <div class="contenedor">
+                <a href="http://scrumexamen.pythonanywhere.com/"><h1 class="">Agro App</h1></a>
+                <input type="checkbox" id="menu-bar">
+                <label class="icon-menu" for="menu-bar"></label>
+                <nav class="menu">
+                    <a href="#">INICIO</a>
+                    <a href="#">PRODUCTOS</a>
+                    <a href="#">GRUPOS</a>
+                    <a href="#">DESTACADOS</a>
+                    <a href="#">BLOG</a>
+                    <a href="#">INICIAR SESION</a>
+                    <a href="#">REGISTRATE</a>
+                </nav>
+            </div>
+        </header>
+
+{% block content%}
+
+{% endblock %}
+
+    <footer>
+            <div class="contenedor">
+                <p class="copyright">Dos Alamos &copy; 2019</p>
+                <div class="redesociales">
+                    <a class="icon-facebook-circled" href="#"></a>
+                    <a class="icon-twitter-circled" href="#"></a>
+                    <a class="icon-instagram-circled" href="#"></a>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

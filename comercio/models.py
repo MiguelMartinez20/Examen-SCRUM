@@ -55,4 +55,43 @@ class Post(models.Model):
         self.save()
 
     def str(self):
-        return self.title  
+        return self.title
+
+class Solicitud(models.Model):
+
+    rut = models.CharField(max_length=200)
+    nombre = models.CharField(max_length=200)
+    apellido = models.CharField(max_length=200)
+    direccion = models.CharField(max_length=200)
+    pyme = models.CharField(max_length=200,blank=True)
+    email = models.CharField(max_length=200)
+
+    def publish(self):
+        self.save()
+
+    def str(self):
+        return self.rut
+
+class Pedido(models.Model):
+
+    nombre = models.CharField(max_length=200)
+    apellido = models.CharField(max_length=200)
+    direccion = models.CharField(max_length=200)
+    detalle = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    date_time = models.DateTimeField(default=timezone.now)
+
+
+    def publish(self):
+        self.date_time = timezone.now()
+        self.save()
+
+    def str(self):
+        return self.nombre
+
+
+
+
+
+
+
