@@ -21,6 +21,7 @@ class Productor(models.Model):
     longitud = models.CharField(max_length=200)
     pyme = models.CharField(max_length=200,blank=True)
     email = models.CharField(max_length=200)
+    photo = models.ImageField(blank=True, upload_to='productor_img')
     cuenta = models.CharField(max_length=10, choices=STATE_CHOICES, default=ACTIVA)
 
     def publish(self):
@@ -65,6 +66,7 @@ class Solicitud(models.Model):
     direccion = models.CharField(max_length=200)
     pyme = models.CharField(max_length=200,blank=True)
     email = models.CharField(max_length=200)
+    photo = models.ImageField(blank=True, upload_to='productor_img')
 
     def publish(self):
         self.save()

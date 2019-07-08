@@ -31,13 +31,16 @@
                 <input type="checkbox" id="menu-bar">
                 <label class="icon-menu" for="menu-bar"></label>
                 <nav class="menu">
-                    <a href="#">INICIO</a>
-                    <a href="#">PRODUCTOS</a>
+                    <a href="http://scrumexamen.pythonanywhere.com/">INICIO</a>
+                    <a href="http://scrumexamen.pythonanywhere.com/productores">COMERCIO</a>
                     <a href="#">GRUPOS</a>
                     <a href="#">DESTACADOS</a>
                     <a href="#">BLOG</a>
-                    <a href="#">INICIAR SESION</a>
-                    <a href="#">REGISTRATE</a>
+                    <a href="http://scrumexamen.pythonanywhere.com/admin">INICIAR SESION</a>
+                    <a href="http://scrumexamen.pythonanywhere.com/registro">REGISTRATE</a>
+                    {% if user.is_authenticated and user.is_staff %}
+                    <a href="http://scrumexamen.pythonanywhere.com/admin">CERRAR SESIÓN</a>
+                    {% endif %}
                 </nav>
             </div>
         </header>
@@ -48,7 +51,7 @@
 
     <footer>
             <div class="contenedor">
-                <p class="copyright">Dos Alamos &copy; 2019</p>
+                <p class="copyright">Agro App &copy; 2019</p>
                 <div class="redesociales">
                     <a class="icon-facebook-circled" href="#"></a>
                     <a class="icon-twitter-circled" href="#"></a>
