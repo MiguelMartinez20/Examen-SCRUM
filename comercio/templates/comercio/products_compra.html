@@ -1,0 +1,40 @@
+{% extends 'comercio/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+        <main>
+            <section id="bannerproduct">
+                <img src="{% static 'comercio/img/banner.jpg'%}">
+                <div class="contenedor">
+                    <h1>
+				       Dinos como realizar tu entrega!
+				    </h1>
+
+                </div>
+            </section>
+
+            <section id="nuestrosproductoslistado">
+                <h2>Datos del Pedido</h2>
+                <div class="contenedor">
+
+                    <article>
+                        <h4>{{ producto.nombre }}</h4>
+                        <h3>{{ producto.detalle }}</h3>
+                        <h4>$ {{ producto.precio }}</h4>
+
+                    </article>
+
+                    <form action="." method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="botoncomprar">SOLICITAR</button>
+                    </form>
+
+                </div>
+            </section>
+
+        </main>
+
+{% endblock %}

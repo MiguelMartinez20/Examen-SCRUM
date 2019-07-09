@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.forms import ModelForm
+from .models import Pedido
 
 class RegisterForm(forms.Form):
 
@@ -23,3 +25,9 @@ class RegisterForm(forms.Form):
             pass
         else:
             raise forms.ValidationError("Las contraseñas no coinciden")
+
+
+class PedidoForm(ModelForm):
+    class Meta:
+        model = Pedido
+        fields = ['nombre', 'apellido', 'direccion', 'email']

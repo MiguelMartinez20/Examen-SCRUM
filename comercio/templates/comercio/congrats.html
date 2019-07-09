@@ -1,0 +1,26 @@
+{% extends 'comercio/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+        <main>
+            <section id="bannerlog">
+                <img src="{% static 'comercio/img/banner.jpg'%}">
+                <div class="contenedor">
+                    <h1>
+				        Pedido Exitoso!
+				    </h1>
+
+                </div>
+            </section>
+
+            <section id="informacion">
+                <h3>Tu pedido fue recibido y esta en camino! &#x1F69A;</h3>
+                <div class="contenedor">
+                    <a href="http://scrumexamen.pythonanywhere.com/" class="botoncomprar">VOLVER AL INICIO</a>
+                </div>
+            </section>
+        </main>
+
+{% endblock %}

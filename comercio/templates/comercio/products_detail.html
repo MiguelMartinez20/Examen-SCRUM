@@ -1,74 +1,112 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>Productora | Dos Alamos</title>
+        <title>Productora | Agro App</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
         <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
 
-        <link rel="stylesheet" href="styles/banner.css">
-        <link rel="stylesheet" href="styles/banneringreso.css">
-        <link rel="stylesheet" href="styles/bannerproductos.css">
-        <link rel="stylesheet" href="styles/blog.css">
-        <link rel="stylesheet" href="styles/fontello.css">
-        <link rel="stylesheet" href="styles/footerproductos.css">
-        <link rel="stylesheet" href="styles/groups.css">
-        <link rel="stylesheet" href="styles/info.css">
-        <link rel="stylesheet" href="styles/main.css">
-        <link rel="stylesheet" href="styles/menu.css">
-        <link rel="stylesheet" href="styles/productodetalle.css">
-        <link rel="stylesheet" href="styles/productos.css">
-        <link rel="stylesheet" href="styles/productoslista.css">
+        <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css" />
+        <link rel="stylesheet" type="text/css" href="{% static 'comercio/css/demo.css' %}" />
+
+        <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+        <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+        <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+        <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+
+        <link rel="stylesheet" href="{% static 'comercio/css/banner.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/banneringreso.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/bannerproductos.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/blog.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/fontello.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/footerproductos.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/groups.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/info.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/main.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/menu.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/productodetalle.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/productos.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/productoslista.css' %}">
 
     </head>
-    
+
     <body>
         <header>
             <div class="contenedor">
-                <h1 class="#">Dos Alamos</h1>
+                <a href="http://scrumexamen.pythonanywhere.com/"><h1 class="">Agro App</h1></a>
                 <input type="checkbox" id="menu-bar">
                 <label class="icon-menu" for="menu-bar"></label>
                 <nav class="menu">
-                    <a href="#">INICIO</a>
-                    <a href="#">PRODUCTOS</a>
+                    <a href="http://scrumexamen.pythonanywhere.com/">INICIO</a>
+                    <a href="http://scrumexamen.pythonanywhere.com/productores">COMERCIO</a>
                     <a href="#">GRUPOS</a>
                     <a href="#">DESTACADOS</a>
                     <a href="#">BLOG</a>
-                    <a href="#">INICIAR SESION</a>
-                    <a href="#">REGISTRATE</a>
+                    <a href="http://scrumexamen.pythonanywhere.com/admin">INICIAR SESION</a>
+                    <a href="http://scrumexamen.pythonanywhere.com/registro">REGISTRATE</a>
+                    {% if user.is_authenticated and user.is_staff %}
+                    <a href="http://scrumexamen.pythonanywhere.com/admin">CERRAR SESIÓN</a>
+                    {% endif %}
                 </nav>
             </div>
         </header>
-        
+
         <main>
             <section id="bannerproduct">
-                <img src="images/banner.jpg">
+                <img src="{% static 'comercio/img/banner.jpg' %}">
                 <div class="contenedor">
                     <h1>
 				        Comienza tu dia <br>
-				        CON NUESTROS PRODUCTOS				
+				        CON NUESTROS PRODUCTOS
 				    </h1>
-                    
+
                 </div>
             </section>
 
             <section id="nuestrosproductosdetalle">
-                <h2>¿ESTA SEGURO QUE QUIERES SOLICITAR ESTE PRODUCTO?</h2>
+                <h2>TIENDA DEL PRODUCTOR</h2>
                 <div class="contenedor">
-                    <article>
-                        <img src="images/productosindex1.jpg" alt="">
-                        <h4>TOMATES</h4>
-                        <h3>$0</h3>
-                        <a href="#" class="botoncomprar">CONFIRMAR</a>
+                    <article id="articleflex">
+                        <h3 id="Producto_name"><b>{{ productor.pyme }}</b></h3>
+                        <h3 id="Producto_name"><b>{{ productor.nombre }} {{ productor.apellido }}</b></h3>
+                        <img src="{{ productor.photo.url }}" alt="Producto Detalle" >
+
+                        <h3>UBICACION &#128204;<h3>
+                        <h4>Direccion: {{ productor.direccion }}</h4>
+
+                        <h3>POSICIONAMIENTO GLOBAL &#128204;<h3>
+                        <h4 id="long">{{ productor.latitud }}</h4>
+                        <h4 id="lati">{{ productor.longitud }}</h4>
+
+                        <h3>CONTACTO &#128231;<h3>
+                        <h4>Email: {{ productor.email }}</h4>
+
+                        <br>
+
+                        <div id="map"></div>
+                        <script type="text/javascript" src='{% static 'comercio/js/demo.js' %}'></script>
+
                     </article>
+
+                    {% for producto in productos %}
+                        <article>
+                            <h3>{{ producto.nombre }}</h3>
+                            <h4>{{ producto.detalle }}</h4>
+                            <h3>$ {{ producto.precio }}</h3>
+                            <a href="{% url 'producto_detail' pk=producto.pk %}" class="botoncomprar">Comprar</a>
+                        </article>
+                    {% endfor %}
                 </div>
             </section>
-            
+
         </main>
-        
-        <footer>
+
+    <footer>
             <div class="contenedor">
-                <p class="copyright">Dos Alamos &copy; 2019</p>
+                <p class="copyright">Agro App &copy; 2019</p>
                 <div class="redesociales">
                     <a class="icon-facebook-circled" href="#"></a>
                     <a class="icon-twitter-circled" href="#"></a>

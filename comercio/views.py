@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
-from .models import Solicitud, Productor
-from comercio.forms import RegisterForm
+from .models import Solicitud, Productor, Producto, Pedido
+from comercio.forms import RegisterForm, PedidoForm
 # Create your views here.
 
 def home(request):
@@ -43,3 +43,37 @@ def register(request):
 def productor_list(request):
     productores = Productor.objects.all()
     return render(request, 'comercio/products.html', {'productores': productores})
+
+def productor_detail(request, pk):
+    productor = get_object_or_404(Productor, pk=pk)
+    productos = Producto.objects.filter(productor=pk)
+    return render(request, 'comercio/products_detail.html', {'productor': productor, 'productos':productos})
+
+def producto_detail(request, pk):
+    producto = get_object_or_404(Producto, pk=pk)
+
+    form = PedidoForm()
+    if request.method == "POST":
+        form = PedidoForm(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            apellido = form.cleaned_data['apellido']
+            direccion = form.cleaned_data['direccion']
+            detalle = producto.detalle
+            email = form.cleaned_data['email']
+
+            p = Pedido.objects.create(nombre = nombre, apellido = apellido, direccion = direccion, detalle = detalle, email = email)
+            p.save()
+            return render(request, 'comercio/congrats.html', {})
+        else:
+            ctx = {'producto': producto, 'form':form}
+            return render(request, 'comercio/products_compra.html', ctx)
+
+    ctx = {'producto': producto, 'form':form}
+    return render(request, 'comercio/products_compra.html', ctx)
+
+
+
+
+
+
