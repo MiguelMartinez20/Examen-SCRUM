@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from .models import Pedido
+from .models import Pedido, Post
 
 class RegisterForm(forms.Form):
 
@@ -31,3 +31,10 @@ class PedidoForm(ModelForm):
     class Meta:
         model = Pedido
         fields = ['nombre', 'apellido', 'direccion', 'email']
+
+
+class PostForm(forms.ModelForm):
+
+    class Meta:
+        model = Post
+        fields = ('title', 'text',)

@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
-from .models import Solicitud, Productor, Producto, Pedido
-from comercio.forms import RegisterForm, PedidoForm
+from .models import Solicitud, Productor, Producto, Pedido, Post
+from comercio.forms import RegisterForm, PedidoForm, PostForm
+from django.utils import timezone
+
 # Create your views here.
 
 def home(request):
@@ -32,7 +34,7 @@ def register(request):
 
             s = Solicitud.objects.create(rut = rut, nombre = nombre, apellido = apellido, direccion = direccion, pyme = pyme, email = email, photo = photo)
             s.save()
-            return render(request, 'comercio/index.html', {})
+            return render(request, 'comercio/congrats_account.html', {})
         else:
             ctx = {'form':form}
             return render(request, 'comercio/register.html', ctx)
@@ -71,6 +73,25 @@ def producto_detail(request, pk):
 
     ctx = {'producto': producto, 'form':form}
     return render(request, 'comercio/products_compra.html', ctx)
+
+def post_list(request):
+    posts = Post.objects.all().order_by('-published_date')
+    return render(request, 'comercio/post_list.html', {'posts': posts})
+
+def post_new(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect("http://scrumexamen.pythonanywhere.com/post/")
+    else:
+        form = PostForm()
+    return render(request, 'comercio/post_edit.html', {'form': form})
+
+
 
 
 

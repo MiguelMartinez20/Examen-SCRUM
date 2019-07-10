@@ -22,8 +22,9 @@
                     {% for productor in productores %}
                     <article>
                         <a href="{% url 'productor_detail' pk=productor.pk %}"><img src="{{ productor.photo.url }}" alt="Producto Dispionible"></a>
-                        <h4><a href="{% url 'productor_detail' pk=productor.pk %}">{{ productor.pyme }}</a></h4>
-                        <h3>{{ productor.direccion }}</h3>
+                        <h3><a href="{% url 'productor_detail' pk=productor.pk %}">{{ productor.pyme }}</a></h3>
+                        <h4>{{ productor.direccion }}</h4>
+                        <br>
                         <a href="{% url 'productor_detail' pk=productor.pk %}" class="botoncomprar">Ver Mercado</a>
                     </article>
                     {% endfor %}

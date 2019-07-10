@@ -1,0 +1,49 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>Productora | Agro App</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'comercio/css/blog.css' %}">
+        <link rel="stylesheet" href="{% static 'comercio/css/footerproductos.css' %}">
+    </head>
+    <body>
+        <div class="page-header">
+            <h1><a href="/">Blog y Anuncios &#x2398; AGRO APP</a></h1>
+            {% if user.is_authenticated and user.is_staff %}
+                <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+            {% endif %}
+        </div>
+
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                {% for post in posts %}
+                    <div class="post">
+                        <div class="date">
+                            {{ post.published_date }}
+                        </div>
+                        <h1>{{ post.title }}</h1>
+                        <p>{{ post.text|linebreaksbr }}</p>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <div class="contenedor">
+                <p class="copyright">Agro App &copy; 2019</p>
+                <div class="redesociales">
+                    <a class="icon-facebook-circled" href="#"></a>
+                    <a class="icon-twitter-circled" href="#"></a>
+                    <a class="icon-instagram-circled" href="#"></a>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
+
+
